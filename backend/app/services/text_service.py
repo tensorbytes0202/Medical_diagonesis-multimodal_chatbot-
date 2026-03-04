@@ -1,12 +1,16 @@
-import requests
+import pickle
+import os
 
-HF_API_URL = "https://api-inference.huggingface.co/models/google/flan-t5-base"
-HF_TOKEN = "YOUR_HF_TOKEN"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MODEL_PATH = os.path.join(BASE_DIR, "models", "text_model.pkl")
+VECTORIZER_PATH = os.path.join(BASE_DIR, "models", "vectorizer.pkl")
 
-headers = {"Authorization": f"Bearer {HF_TOKEN}"}
+model = pickle.load(open(MODEL_PATH, "rb"))
+vectorizer = pickle.load(open(VECTORIZER_PATH, "rb"))
 
-def chatbot_response(user_input: str):
-    payload = {"inputs": user_input}
-    response = requests.post(HF_API_URL, headers=headers, json=payload)
-    result = response.json()
-    return result[0]["generated_text"]
+def predict_disease(symptoms: str):
+    symptoms_vectorized = vectorizer.transform([symptoms])
+    prediction = model.predict(symptoms_vectorized)[0]
+    confidence = max(model.predict_proba(symptoms_vectorized)[0])
+
+    return prediction, float(confidence)

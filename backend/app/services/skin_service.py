@@ -1,23 +1,28 @@
-import numpy as np
 import tensorflow as tf
-from tensorflow.keras.utils import load_img, img_to_array
+import numpy as np
+from PIL import Image
+import io
 import os
 
-# safer absolute path
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MODEL_PATH = os.path.join(BASE_DIR, "models", "skin_model.h5")
-
+MODEL_PATH = os.path.join("app", "models", "skin_model.h5")
 model = tf.keras.models.load_model(MODEL_PATH)
 
-class_names = ["Eczema", "Psoriasis", "Acne"]
+class_names = [
+    "Atopic Dermatitis",
+    "Herpes",
+    "Lyme disease",
+    "Poison Ivy",
+    "Psoriasis",
+    "Rosacea"
+]
 
-def predict_skin(image_path: str):
-    img = load_img(image_path, target_size=(224, 224))
-    img_array = img_to_array(img)
-    img_array = np.expand_dims(img_array, axis=0) / 255.0
+def predict_skin(image_bytes):
+    image = Image.open(io.BytesIO(image_bytes)).resize((128,128))
+    img_array = np.array(image) / 255.0
+    img_array = np.expand_dims(img_array, axis=0)
 
-    prediction = model.predict(img_array)
-    predicted_class = class_names[np.argmax(prediction)]
-    confidence = float(np.max(prediction))
+    predictions = model.predict(img_array)
+    predicted_class = class_names[np.argmax(predictions)]
+    confidence = float(np.max(predictions))
 
     return predicted_class, confidence

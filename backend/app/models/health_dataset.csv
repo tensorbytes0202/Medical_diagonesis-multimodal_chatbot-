@@ -1,0 +1,26 @@
+symptoms,disease
+fever cough cold,Flu
+fever sore throat body pain,Flu
+high fever chills sweating,Flu
+headache nausea vomiting,Migraine
+severe headache light sensitivity,Migraine
+itching redness skin rash,Eczema
+dry skin itching cracks,Eczema
+joint pain stiffness swelling,Arthritis
+knee pain joint stiffness,Arthritis
+acne pimples oily skin,Acne
+whiteheads blackheads pimples,Acne
+chest pain shortness breath,Heart Disease
+rapid heartbeat chest discomfort,Heart Disease
+frequent urination increased thirst,Diabetes
+fatigue blurred vision diabetes,Diabetes
+abdominal pain diarrhea,Food Poisoning
+stomach cramps vomiting,Food Poisoning
+sneezing runny nose allergy,Allergy
+skin swelling itching allergy,Allergy
+hair loss scalp itching,Fungal Infection
+scalp redness dandruff,Fungal Infection
+back pain muscle stiffness,Muscle Strain
+leg pain swelling clot,Deep Vein Thrombosis
+burning urination bladder pain,UTI
+weight loss fatigue thyroid,Thyroid Disorder
