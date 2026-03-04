@@ -1,0 +1,23 @@
+# Virtual Environment
+venv/
+backend/venv/
+frontend/venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Model files (optional - agar large ho)
+*.h5
+*.pkl
+
+# Environment variables
+.env
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
